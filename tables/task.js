@@ -11,7 +11,7 @@ var azureMobileApps = require('azure-mobile-apps');
 // Create a new table definition
 var table = azureMobileApps.table();
 
-//table.access = 'authenticated';
+table.access = 'authenticated';
 
 // Table Definition 
 table.name = 'task';

@@ -42,7 +42,10 @@ var api = {
     },
 
     get: function (req, res, next) {
-        //console.info(JSON.stringify(req.azureMobile.user));
+        console.info(JSON.stringify(req.azureMobile.user));
+        req.azureMobile.user.getIdentity().then(function (userInfo) {
+            console.info(JSON.stringify(userInfo.aad.claims.emailaddress));
+          });
         
         var query = new azure.TableQuery()
             .top(100)
