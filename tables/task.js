@@ -40,7 +40,10 @@ table.read(function (context) {
 table.insert(function (context) {
     //console.info("user name -", JSON.stringify(context.user));
     //context.item.userId = context.user.id;
-    return context.execute();
+    return context.user.getIdentity().then(function (userInfo) {
+        context.item.userId = userInfo.aad.claims.emailaddress;
+        return context.execute();
+      });
 });
 
 // UPDATE - for this scenario, we don't need to do anything - this is
