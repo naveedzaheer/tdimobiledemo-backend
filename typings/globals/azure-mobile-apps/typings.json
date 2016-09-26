@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/708b7be87332bd42d9d0db5db0398a95beae4e41/azure-mobile-apps/azure-mobile-apps.d.ts",
+    "raw": "registry:dt/azure-mobile-apps#2.1.7+20160920060419",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/708b7be87332bd42d9d0db5db0398a95beae4e41/azure-mobile-apps/azure-mobile-apps.d.ts"
+  }
+}
