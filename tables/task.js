@@ -35,7 +35,7 @@ table.columns = {
 table.read(function (context) {
     return context.user.getIdentity().then(function (userInfo) {
     console.info("user name -", JSON.stringify(userInfo));
-    context.query.where({ userid: userInfo.aad.claims.emailaddress });
+    context.query.where({ userid: userInfo.aad.claims.upn });
     return context.execute();
   });
 //    var userName = context.user.claims.upn;
