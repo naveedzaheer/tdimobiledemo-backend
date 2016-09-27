@@ -20,6 +20,7 @@ var api = {
         var uuid1 = uuid.v1();
         var bodyJson = req.body;
 
+        userName = req.azureMobile.user.claims.upn;        
         var entity = {
             PartitionKey: entityGen.String(userName),
             RowKey: entityGen.String(uuid1),
@@ -43,9 +44,7 @@ var api = {
 
     get: function (req, res, next) {
         console.info(JSON.stringify(req.azureMobile.user));
-        req.azureMobile.user.getIdentity().then(function (userInfo) {
-            console.info(JSON.stringify(userInfo.aad.claims.emailaddress));
-          });
+        userName = req.azureMobile.user.claims.upn;        
         
         var query = new azure.TableQuery()
             .top(100)
@@ -66,6 +65,7 @@ var api = {
     },
 
     delete: function (req, res, next) {
+        userName = req.azureMobile.user.claims.upn;        
         var entity = {
             PartitionKey: entityGen.String(userName),
             RowKey: entityGen.String(req.body.key)
@@ -84,5 +84,7 @@ var api = {
         });
     }
 };
+
+api.access = 'authenticated';
 
 module.exports = api;
