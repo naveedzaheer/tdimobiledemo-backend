@@ -33,14 +33,18 @@ table.columns = {
 // Configure specific code when the client does a request
 // READ - only return records belonging to the authenticated user
 table.read(function (context) {
-    return context.user.getIdentity().then(function (userInfo) {
-    console.info("user name -", JSON.stringify(userInfo));
-    context.query.where({ userid: userInfo.aad.claims.upn });
-    return context.execute();
-  });
-//    var userName = context.user.claims.upn;
-//    context.query.where({ userid: userName });
-//    return context.execute();
+    if(typeof process.env.ON_PREM == "undefined") {
+        return context.user.getIdentity().then(function (userInfo) {
+        console.info("user name -", JSON.stringify(userInfo));
+        context.query.where({ userid: userInfo.aad.claims.upn });
+        return context.execute();
+        });
+    }
+    else {
+    var userName = context.user.claims.upn;
+    context.query.where({ userid: userName });
+    return context.execute();
+    }
 });
 
 // CREATE - add or overwrite the userId based on the authenticated user
