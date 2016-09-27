@@ -33,6 +33,7 @@ table.columns = {
 // Configure specific code when the client does a request
 // READ - only return records belonging to the authenticated user
 table.read(function (context) {
+    console.info("user name -", JSON.stringify(context.user));
     console.info("user name -", JSON.stringify(context.user.claims.upn));
     var userName = context.user.claims.upn;
     context.query.where({ userid: userName });
