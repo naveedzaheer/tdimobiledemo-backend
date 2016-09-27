@@ -7,12 +7,26 @@ module.exports = function (configuration) {
     // Retrieve all records in the specified category
     router.get('/category/:category', function (req, res, next) {
 
-        var userName = req.azureMobile.user.claims.upn;        
-        req.azureMobile.tables('task')
+        if(typeof process.env.ON_PREM == "undefined") {
+            return req.azureMobile.user.getIdentity().then(function (userInfo) {
+            console.info("user name -", JSON.stringify(userInfo));
+            var userName = userInfo.aad.claims.upn;        
+            req.azureMobile.tables('task')
             .where({ category: req.params.category, userid: userName })
             .read()
             .then(results => res.json(results))
             .catch(next); // it is important to catch any errors and log them
+            });
+        }
+        else {
+            console.info("user name -", JSON.stringify(req.azureMobile.user.claims.upn));
+            var userName = req.azureMobile.user.claims.upn;        
+            req.azureMobile.tables('task')
+                .where({ category: req.params.category, userid: userName })
+                .read()
+                .then(results => res.json(results))
+                .catch(next); // it is important to catch any errors and log them
+        }
     });
 
     return router;
