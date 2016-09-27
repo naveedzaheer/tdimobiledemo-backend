@@ -20,6 +20,7 @@ var api = {
         var uuid1 = uuid.v1();
         var bodyJson = req.body;
 
+        console.info("req.azureMobile.user", JSON.stringify(req.azureMobile.user));       
         userName = req.azureMobile.user.claims.upn;        
         var entity = {
             PartitionKey: entityGen.String(userName),
