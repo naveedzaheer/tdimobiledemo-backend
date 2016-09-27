@@ -20,8 +20,6 @@ var api = {
         var uuid1 = uuid.v1();
         var bodyJson = req.body;
 
-        console.info("req.azureMobile.user", JSON.stringify(req.azureMobile.user));       
-        userName = req.azureMobile.user.claims.upn;        
         var entity = {
             PartitionKey: entityGen.String(userName),
             RowKey: entityGen.String(uuid1),
@@ -44,8 +42,6 @@ var api = {
     },
 
     get: function (req, res, next) {
-        console.info(JSON.stringify(req.azureMobile.user));
-        userName = req.azureMobile.user.claims.upn;        
         
         var query = new azure.TableQuery()
             .top(100)
@@ -66,7 +62,6 @@ var api = {
     },
 
     delete: function (req, res, next) {
-        userName = req.azureMobile.user.claims.upn;        
         var entity = {
             PartitionKey: entityGen.String(userName),
             RowKey: entityGen.String(req.body.key)
