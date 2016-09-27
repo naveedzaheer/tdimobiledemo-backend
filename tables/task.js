@@ -41,7 +41,9 @@ table.insert(function (context) {
     //console.info("user name -", JSON.stringify(context.user));
     //context.item.userId = context.user.id;
     return context.user.getIdentity().then(function (userInfo) {
-        context.item.userId = userInfo.aad.claims.emailaddress;
+        console.log('user.getIdentity = ', JSON.stringify(userInfo));
+        console.log('userInfo.aad.claims.emailaddres = ', userInfo.aad.claims.emailaddres);
+        context.item.userId = userInfo.aad.claims.emailaddress;
         return context.execute();
       });
 });
